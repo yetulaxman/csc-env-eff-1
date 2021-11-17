@@ -102,7 +102,7 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
 
 
 # Disk and Storage Overview
- ![](./img/disk-storage.png)
+ ![](./img/disk-systems.svg){width=90%}
 
 # Use NVMe disks for faster image conversion
 - Working with bigger images for your needs 

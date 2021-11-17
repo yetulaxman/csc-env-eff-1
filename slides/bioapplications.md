@@ -49,15 +49,34 @@ Basic Introduction to (Bio)containers
     - via [Allas object storage](https://docs.csc.fi/data/Allas/)
 - There are [many ways to transfer data to/from CSC and your local computer](https://docs.csc.fi/data/moving/)
 
-# Displaying current status of disk areas
+# Central Dogma of Containerisation
 
-- use `csc-workspaces` command to display available projects and quotas 
+![](./img/dogma.png)
 
-![](./img/disk_status.png){width=90%}
+- Two containerisation platforms
+    - Docker image built from dockerfiles
+    - Singularity image built from singularity recipes (deffiles)
 
-# Disk and storage overview (revisited) 
+# Topic 
 
-![](./img/disk-systems.svg){width=90%}
+Biocontainers and Related Registries
+
+# Biocontainers: Bioinformatics Containers
+- A community-driven effort 
+- Focus is to create and manage bioinformatics software containers
+- Focus on popular Omics’ methods (Genomics, proteomics, metagenomics, metabolomics)
+- Can be integrated into bioinformatics pipelines and different architectures
+- Provides ready-made containers for bioinformatics community
+   - [QUAY registry](https://quay.io)
+   - [DockerHub](https://hub.docker.com/)
+
+
+# Biocontainers Registry (1/2)
+
+- A hosted registry of all BioContainers images that are ready to be used 
+- The interface to search BioContainers across all the registries.
+- Source of Biocontainer image can be conda recipe or dockerfile
+
 
 # Additional fast local disk areas 
 

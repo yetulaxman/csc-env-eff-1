@@ -37,6 +37,10 @@ Basic Introduction to (Bio)containers
 - **Container Engine**:Creates, ships and runs  containers deployable on a physical or  virtual, host locally, in a datacenter or cloud service provider
 - **Registry Service**: Cloud or server based storage and distribution service for your images
 
+# Some Basic Terminology
+
+![](./img/basic_term.png)
+
 # Moving data between and to/from supercomputers
 
 - Puhti and Mahti have their own disk systems

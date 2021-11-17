@@ -136,4 +136,4 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
 
 #
 <br><br><br>
-     <p align="center">**Time for Tutorials<br> <br> **</p>
+     <p align="center">**Time for Tutorials **</p>

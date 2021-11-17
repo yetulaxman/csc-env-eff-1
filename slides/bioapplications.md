@@ -70,6 +70,12 @@ Biocontainers and Related Registries
    - [QUAY registry](https://quay.io)
    - [DockerHub](https://hub.docker.com/)
 
+# Biocontainers Registry (1/2)
+
+- A hosted registry of all BioContainers images that are ready to be used 
+- The interface to search BioContainers across all the registries.
+- Source of Biocontainer image can be conda recipe or dockerfile
+  ![](./img/bioc_home.png)
 
 # Biocontainers Registry (2/2)
 
@@ -78,22 +84,32 @@ Biocontainers and Related Registries
 - Explore more at Biocontainers Registry(https://biocontainers.pro)
 - ![](./img/biocregistry2.png)
 
-# Biocontainers Registry (1/2)
+# DockerHub
+ - [A registry from Docker](https://hub.docker.com/bio) 
+ - A centralized management of user accounts and image chesums 
+ - Hosts both public/private repositories
+ - Not all images can work smoothly with Singularity
+     - Applications with root access
+     - Applications with entrypoints
+     
+# DockerHub Screen Shot
 
-- A hosted registry of all BioContainers images that are ready to be used 
-- The interface to search BioContainers across all the registries.
-- Source of Biocontainer image can be conda recipe or dockerfile
-- ![](./img/bioc_home.png)
-- 
-# Additional fast local disk areas 
+ ![](./img/dockerhub.png)
 
-- `$TMPDIR` on Login nodes
-    - Each of the login nodes have 2900 GiB of fast local storage `$TMPDIR`
-    - The local storage is meant for temporary storage and is cleaned frequently
-- NVMe on part of compute nodes in Puhti
-    - Interactive batch job nodes, IO- and gpu-nodes have [local fast storage (NVMe)](https://docs.csc.fi/computing/running/creating-job-scripts-puhti/#local-storage) as `$LOCAL_SCRATCH`
-    - You must copy data in and out during your batch job. NVMe is accessible only during your job allocation.
-    - If your job reads or writes a lot of small files, using this can give 10x performance boost
+# QUAY Container Registry
+- Quay.io is a container registry from Red Hat
+- A scalable open source platform to host container images across any size organization
+- Create your own public repositories
+- Provides CI support for automated builds for BioConda GitHub
+- All Biocontainers are docker-based and are publicly available for free 
+
+# Cloud Library from Sylabs
+
+- Cloud Library is the official image
+     registry provided by Sylabs.io
+- [A singularity hub](https://cloud.sylabs.io/library 
+- Images should work normally on HPC systems
+![](./img/sylabs.png)
 
 # What are the different disk areas for?
 

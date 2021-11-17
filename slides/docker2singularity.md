@@ -47,6 +47,21 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
      - Stored as a normal file
      - Easy portability : transferring and sharing images across a cluster is very easy
      - Image can be used as binary (./image.sif)
+     - 
+# Docker essentials for image modification
+
+- Find the ID of the container
+     - *docker ps*
+- Find the ID of an image
+     - *Docker images*   
+- Build a container image from the Dockerfile
+     - *docker build -t --tag <image repository>:<image tag> . *  
+- Start an interactive bash session
+     - *docker run -it <image> /bin/bash* 
+- Create an image from running container:
+     - *docker commit <ID> <image repository>:<image tag> * 
+- Save image tar file image locally
+     - *docker save -o <path for generated tar file>  <image name>
 
 #  
 <br><br><br>

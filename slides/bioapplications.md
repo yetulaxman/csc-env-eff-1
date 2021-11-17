@@ -76,6 +76,7 @@ Biocontainers and Related Registries
 - A hosted registry of all BioContainers images that are ready to be used 
 - The interface to search BioContainers across all the registries.
 - Source of Biocontainer image can be conda recipe or dockerfile
+- ![](./img/biocregistry.png)
 
 
 # Additional fast local disk areas 

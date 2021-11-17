@@ -21,7 +21,7 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
 - Basic introduction to (Bio)container 
 - Searching pre-existing biocontainers 
 - Deploying (running) biocontainers in HPC environment
-   - Containers availbale as modules
+   - Containers available as modules
    - Custom-made containers
 - Mounting/binding volumes
 - Bioapplication examples
@@ -71,14 +71,20 @@ Biocontainers and Related Registries
    - [DockerHub](https://hub.docker.com/)
 
 
+# Biocontainers Registry (2/2)
+
+- Growing number tools
+- current status: 10.4K tools; 44.2K versions and 213.2K containers and packages 
+- Explore more at Biocontainers Registry(https://biocontainers.pro)
+- ![](./img/biocregistry2.png)
+
 # Biocontainers Registry (1/2)
 
 - A hosted registry of all BioContainers images that are ready to be used 
 - The interface to search BioContainers across all the registries.
 - Source of Biocontainer image can be conda recipe or dockerfile
-- ![](./img/biocregistry.png)
-
-
+- ![](./img/bioc_home.png)
+- 
 # Additional fast local disk areas 
 
 - `$TMPDIR` on Login nodes

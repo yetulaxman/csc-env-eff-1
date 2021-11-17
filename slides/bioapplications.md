@@ -39,7 +39,7 @@ Basic Introduction to (Bio)containers
 
 # Some Basic Terminology
 
-![](./img/basic_term.png)
+![](./img/terminology.png)
 
 # Moving data between and to/from supercomputers
 
@@ -53,7 +53,7 @@ Basic Introduction to (Bio)containers
 
 - use `csc-workspaces` command to display available projects and quotas 
 
-![](./img/disk_status.png)
+![](./img/disk_status.png){width=90%}
 
 # Disk and storage overview (revisited) 
 

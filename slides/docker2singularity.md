@@ -26,7 +26,7 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
 <br><br><br>
 <p align="center" clor="green"> **Brief introduction to Docker *vs.* Singualrity  images** </p>
 
-# Why do we care for pre-built Docker Images 
+# Why Do We Care for Pre-built Docker Images 
 
 - The docker is a leading container platform  and is widely adopted in industry/cloud applications
 - Large number of images are archived in docker registries
@@ -47,21 +47,20 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
      - Stored as a normal file
      - Easy portability : transferring and sharing images across a cluster is very easy
      - Image can be used as binary (./image.sif)
-     - 
-# Docker essentials for image modification
+     
+ 
+# Docker Essentials for Image Modification
 
-- Find the ID of the container
-     - *docker ps*
 - Find the ID of an image
      - *Docker images*   
 - Build a container image from the Dockerfile
-     - *docker build -t --tag <image repository>:<image tag> . *  
+     - *docker build -t --tag &lt;image repository&gt;:&lt;image tag &gt;  . *  
 - Start an interactive bash session
-     - *docker run -it <image> /bin/bash* 
+     - *docker run -it  &lt;image &gt;  /bin/bash* 
 - Create an image from running container:
-     - *docker commit <ID> <image repository>:<image tag> * 
+     - *docker commit  &lt;ID&gt;  &lt;image repository&gt;:&lt;image tag &gt; * 
 - Save image tar file image locally
-     - *docker save -o <path for generated tar file>  <image name>
+     - *docker save -o &lt;path for generated tar file &gt;  &lt;image name &gt;*
 
 #  
 <br><br><br>
@@ -79,26 +78,26 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
 
 
 # Running Singularity Containers from Private Docker Images
-- One can have a create a private repository in docker registry
+- One can create a private repository in docker registry
 - In private repo, one has to authenticate before pulling an image
 
 - singularity pull --docker-login docker://privaterepo/image:tag
-      - export SINGULARITY_DOCKER_USERNAME=username
-      - export SINGULARITY_DOCKER_PASSWORD=password
+    - export SINGULARITY_DOCKER_USERNAME=username
+    - export SINGULARITY_DOCKER_PASSWORD=password
 
 - Finally test that image works :  ./imagename.sif
 
 # Running Singularity Containers from  Local Docker Images
-- Sometimes pre-built docker images may not work or does not meet our needs 
-- First, save your local docker image from your machine (VM, laptop)
+- pre-built docker images may not work or does not meet our needs 
+- First save your local docker image from your machine (VM, laptop)
      -  Check image using the following: sudo docker images
      - sudo docker save image_id -o local_docker.tar
 - Copy tar file  to HPC environment 
 - Finally, build a singularity image from the local_docker.tar 
      - singularity build local_singularity_image.sif docker-archive://local_docker.tar
-     - Using docker-archive bootstrap agent.
+     - Using docker-archive bootstrap agent
 
-# Sinularity Cache in HPC environment
+# Sinularity Cache in HPC Environment
 - Default location: $HOME/.singularity
      - Amount of available space in $HOME in HPC systems is limited by a quota
      - Your home can be quickly filled up and end up disk space errors 
@@ -112,42 +111,47 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
 #  
 
 <br><br><br>
-     <p align="center"> **HPC Disk Systems and Efficient Image Conversion** </p>
-
+     <p align="center"> <font size = "44"> <h1> **HPC Disk Systems and Efficient Image Conversion** </p> </h1></font>
 
 
 # Disk and Storage Overview
  ![](./img/disk-systems.svg){width=90%}
 
-# Use NVMe disks for faster image conversion
+# Use NVMe Disks for Faster Image Conversion
 - Working with bigger images for your needs 
 - Not all compute nodes have these NVMe disks
 - You can request these resources in batch script /interactive node
 - Use the environment variable $LOCAL_SCRATCH to access local storage on each node.
 - In batch jobs, remember to copy the files to back to your scratch folders
 
+
+# Tiny batch script that uses NVMe disks
+ ![](./img/bash.png){width=90%}
+
+
 #  
 
 <br><br><br>
      <p align="center"> **Good Practices Tips While Converting Images** </p>
 
-# Good Practices in Image Conversion
+# Good Practices in Image Conversion (1/2)
 
 - Maintain tags of the image (reproducibility !)
-     - generic URI for docker :docker://<user>/<repo-name>[:<tag>]
+     - generic URI for docker :docker://&lt;user &gt;/&lt;repo-name &gt;[: &lt;tag &gt;]
      - developers to release several different versions of the same container with different tags
 - Hashes  are even more unique 
      - library://debian:sha256.b92c7fdfcc615
 - Pay attention to special tag: latest
      - Always pull same image: singularity pull library://debian:sha256.b92c7fdfcc615
 
-#Good Practices in Image Conversion
+
+# Good Practices in Image Conversion (2/2)
 
 - Don’t use any image that would be running under root
      - Works fine in docker world and results in bugs in singularity
 - If you modify the image,  don’t install to $HOME or $TMP
 - Docker images with ENTRYPOINT scripts are usually broken
-           - ENTRYPOINT [ "entrypoint_script.sh" ]
+    - ENTRYPOINT [ "entrypoint_script.sh" ]
 
 #
 <br><br><br>

@@ -111,21 +111,79 @@ Biocontainers and Related Registries
 - Images should work normally on HPC systems
 ![](./img/sylabs.png)
 
-# What are the different disk areas for?
 
-- [Allas](https://docs.csc.fi/data/Allas/) - for data which is not actively used
-- [HOME](https://docs.csc.fi/computing/disk/#home-directory) - small, thus only for most important (small) files, personal access only
-- [scratch](https://docs.csc.fi/computing/disk/#scratch-directory) - main working area, can be used to share with project members
-- [projappl](https://docs.csc.fi/computing/disk/#projappl-directory) - not cleaned up, e.g. for shared binaries 
-- [Login node local tmp](https://docs.csc.fi/computing/disk/#login-nodes) - compiling, temporary, fast IO 
-- [NVMe](https://docs.csc.fi/computing/running/creating-job-scripts-puhti/#local-storage) - fast IO in batch jobs
+# Other Singularity-based resources
+ - [SingularityHub](https://singularityhub.github.io/singularityhub-docs/): no longer online as a builder service, but exists as a read only archive
+More information: 
+ - Pulling an image from the registry:  Singularity pull shub://
+ - Biocontainers repositories
+    - [biocontainers singualrity](https://containers.biocontainers.pro/s3/SingImgsRepo/)
+    - [Galaxy singularity](https://depot.galaxyproject.org/singularity/)
 
-# Some best practice tips
 
-- Don't put databases on Lustre (projappl, scratch, home) 
-    - use other CSC services like [kaivos](https://docs.csc.fi/data/kaivos/overview/) or mongoDB in cPouta
-- Don't create a lot of files in one folder
-- Don't create overall a lot of files (if you're creating tens of thousands of files, you should probably rethink the workflow)
-- Take backups of important files. Data on CSC disks is not backed up even if systems are fault tolerant.
-- When working with the large number of smaller files, consider using fast local disks
-- [Best practice performance tips for using Lustre](https://docs.csc.fi/computing/lustre/#best-practices)
+# Topic 
+
+Deploying Biocontainers in HPC Environment
+
+
+# Qualified Reference URI for Image
+- A qualified image name consists of three main components:
+     - Image prefix: library/shub/library
+     - a registry location (hostname)
+     - a username (namespace)
+     - a image name (reponame)
+     
+- URI Prefix://hostname[:port]/username/imagename[:tag]
+    -  For DockerHub registry, it is  docker://username /image name[:tag]
+    -  For QUAY registry, it is docker://quay.io/username/image name[:tag]
+
+# Working with Containers in CSC HPC Environment
+
+ - Singualrity is installed on Puhti  (no need to load any modules)
+ -  Available options	
+     - Using modularised container (pre-installed for you in Puhti)
+        - Examples: Rstudio, Chip-Seq-Pipeline,CrossMap, Cutadapt,EAGER,QIIME 1,Jupyter,BRAKER,aTRAM, METABOLIC
+ - Using custom-made container (your own image or dowloaded from container registry)
+      - Any BioContainer, Deepvariant, GATK ..etc
+
+# Getting Started with a Modularised Container
+
+- Load a module on Puhti/Mahti
+    - e.g., module load Cutadapt
+- Module command sets  some environment variables on host  machine
+    - e.g., SING_IMAGE and SING_FLAGS 
+- Use singularity_wrapper  which has advantages than plain singularity command
+    - singularity_wrapper exec command_to_run
+- Mounting datasets with SquashFS
+   - when input files are too big in numbers
+
+# Getting Started with a Custom-made Container
+
+- Either you pull an image from registry or prepare one by yourself
+- Pull/Build an image from registry repositories using singularity command
+     - singularity pull hello-world.sif shub://vsoch/hello-world
+     - singularity build r-base-latest.sif docker://r-base
+- Note:
+     - URI beginning with library:// to build from the Container Library.
+     - URI beginning with docker:// to build from Dockerhub/Quay.io. 
+     - URI beginning with shub:// to build from Singularity Hub.
+- Executing a command
+     - singularity exec -B /path/inside/container/://path/on/host/ singularity_image  actual_command
+
+# Topic 
+
+Mounting/binding volumesBinding external directories
+
+# Why Mounting/Binding Host Volumes (1/2)
+ - No data persistence in container file systems
+ - Can’t share any data with other containers/volumes 
+ - Containers are stateless 
+ - Decoupling container from storage
+
+# Why Mounting/Binding Host Volumes (2/2)
+ - Volume: It is a storage. This name comes from the Enterprise use-case. Volumes are like Directories.
+ - Note that you can only mount few  directories on HPC systems
+      - HOME, PROJAPPL, SCRATCH
+ - Binding/Mapping
+      - You can bind/map directories from the Host machine into a Guest container
+      - singularity run -B /guest/path:/host/path  singularity_image.simg

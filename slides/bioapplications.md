@@ -2,9 +2,7 @@
 theme: csc-2019
 lang: en
 ---
-
 # Containerised Bio Applications in HPC Environment {.title}
-In this section, you will learn how to manage different disk areas in HPC environment at CSC
 
 <div class="column">
 ![](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
@@ -18,36 +16,21 @@ Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creati
 </div>
 
 # Outline
-- Basic introduction to (Bio)container 
-- Searching pre-existing biocontainers 
+- Getting started with containerised applications
+- Biocontainers and related registries
 - Deploying (running) biocontainers in HPC environment
    - Containers available as modules
    - Custom-made containers
 - Mounting/binding volumes
-- Bioapplication examples
 
-# Topic 
-
-Basic Introduction to (Bio)containers
-
-# Some Basic Terminology
-
-- **Image**: self-contained snapshot of your full application,packages and dependencies
-- **Container**:  A running instance of an image
-- **Container Engine**:Creates, ships and runs  containers deployable on a physical or  virtual, host locally, in a datacenter or cloud service provider
-- **Registry Service**: Cloud or server based storage and distribution service for your images
+#  
+<br><br><br>
+<p align="center" clor="green"> **Getting Started With Containerised Applications** </p>
 
 # Some Basic Terminology
 
 ![](./img/terminology.png)
 
-# Moving data between and to/from supercomputers
-
-- Puhti and Mahti have their own disk systems
-- Data can be moved between the supercomputers 
-    - [directly with rsync](https://docs.csc.fi/data/moving/rsync/) 
-    - via [Allas object storage](https://docs.csc.fi/data/Allas/)
-- There are [many ways to transfer data to/from CSC and your local computer](https://docs.csc.fi/data/moving/)
 
 # Central Dogma of Containerisation
 
@@ -57,9 +40,15 @@ Basic Introduction to (Bio)containers
     - Docker image built from dockerfiles
     - Singularity image built from singularity recipes (deffiles)
 
-# Topic 
 
-Biocontainers and Related Registries
+# Benefits of Running a Software as  Container
+
+![](./img/benefits.png)
+
+
+#  
+<br><br><br>
+     <p align="center"> **Biocontainers and Related Registries** </p>
 
 # Biocontainers: Bioinformatics Containers
 - A community-driven effort 
@@ -74,23 +63,24 @@ Biocontainers and Related Registries
 
 - A hosted registry of all BioContainers images that are ready to be used 
 - The interface to search BioContainers across all the registries.
-- Source of Biocontainer image can be conda recipe or dockerfile
-  ![](./img/bioc_home.png)
+- Source of Biocontainer image can be conda recipe or dockerfile <br>
+  ![](./img/biocregistry.png) <br> 
+           <p align="right"> <small> Bai J. et al. (2021) J Proteome Res. 2021 Apr 2;20(4):2056-2061 </small> </p>
 
 # Biocontainers Registry (2/2)
 
 - Growing number tools
 - current status: 10.4K tools; 44.2K versions and 213.2K containers and packages 
-- Explore more at Biocontainers Registry(https://biocontainers.pro)
-- ![](./img/biocregistry2.png)
+- Explore more at [Biocontainers Registry](https://biocontainers.pro)
+
 
 # DockerHub
  - [A registry from Docker](https://hub.docker.com/bio) 
  - A centralized management of user accounts and image chesums 
  - Hosts both public/private repositories
  - Not all images can work smoothly with Singularity
-     - Applications with root access
-     - Applications with entrypoints
+     - Applications running under *root* 
+     - Applications running with *entrypoints*
      
 # DockerHub Screen Shot
 
@@ -105,11 +95,10 @@ Biocontainers and Related Registries
 
 # Cloud Library from Sylabs
 
-- Cloud Library is the official image
-     registry provided by Sylabs.io
-- [A singularity hub](https://cloud.sylabs.io/library 
-- Images should work normally on HPC systems
-![](./img/sylabs.png)
+- [A singularity registry](https://cloud.sylabs.io/library)
+- Cloud Library is the official image registry provided by Sylabs.io
+- Provides container service including remote building
+- The images should work normally on HPC systems
 
 
 # Other Singularity-based resources
@@ -117,13 +106,15 @@ Biocontainers and Related Registries
 More information: 
  - Pulling an image from the registry:  Singularity pull shub://
  - Biocontainers repositories
-    - [biocontainers singualrity](https://containers.biocontainers.pro/s3/SingImgsRepo/)
+    - [Biocontainers SingImgRepo](https://containers.biocontainers.pro/s3/SingImgsRepo/)
     - [Galaxy singularity](https://depot.galaxyproject.org/singularity/)
 
 
-# Topic 
+#  
 
-Deploying Biocontainers in HPC Environment
+<br><br><br>
+     <p align="center"> **Deploying Biocontainers in HPC Environment** </p>
+
 
 
 # Qualified Reference URI for Image
@@ -142,7 +133,7 @@ Deploying Biocontainers in HPC Environment
  - Singualrity is installed on Puhti  (no need to load any modules)
  -  Available options	
      - Using modularised container (pre-installed for you in Puhti)
-        - Examples: Rstudio, Chip-Seq-Pipeline,CrossMap, Cutadapt,EAGER,QIIME 1,Jupyter,BRAKER,aTRAM, METABOLIC
+        - Examples: *Rstudio, Chip-Seq-Pipeline,CrossMap, Cutadapt,EAGER,QIIME1,Jupyter,BRAKER,aTRAM and METABOLIC*
  - Using custom-made container (your own image or dowloaded from container registry)
       - Any BioContainer, Deepvariant, GATK ..etc
 
@@ -161,29 +152,33 @@ Deploying Biocontainers in HPC Environment
 
 - Either you pull an image from registry or prepare one by yourself
 - Pull/Build an image from registry repositories using singularity command
-     - singularity pull hello-world.sif shub://vsoch/hello-world
-     - singularity build r-base-latest.sif docker://r-base
+     - *singularity pull hello-world.sif shub://vsoch/hello-world*
+     - *singularity build r-base-latest.sif docker://r-base*
 - Note:
-     - URI beginning with library:// to build from the Container Library.
-     - URI beginning with docker:// to build from Dockerhub/Quay.io. 
-     - URI beginning with shub:// to build from Singularity Hub.
+     - URI beginning with library:// are from Container Library.
+     - URI beginning with docker:// are from Dockerhub/Quay.io. 
+     - URI beginning with shub:// are from Singularity Hub.
 - Executing a command
-     - singularity exec -B /path/inside/container/://path/on/host/ singularity_image  actual_command
+     - use *singularity* or *[singularity_wrapper](https://docs.csc.fi/computing/containers/run-existing/)* 
 
-# Topic 
+#
+<br><br><br>
+     <p align="center">**Mounting/Binding Host Volume**</p>
 
-Mounting/binding volumesBinding external directories
-
-# Why Mounting/Binding Host Volumes (1/2)
+# Why Mounting/Binding Host Volumes 
  - No data persistence in container file systems
  - Can’t share any data with other containers/volumes 
  - Containers are stateless 
  - Decoupling container from storage
 
-# Why Mounting/Binding Host Volumes (2/2)
- - Volume: It is a storage. This name comes from the Enterprise use-case. Volumes are like Directories.
+# Mounting/Binding Host Volumes
+ - Volume: Volumes are like Directories. This name comes from the Enterprise use-case. 
  - Note that you can only mount few  directories on HPC systems
       - HOME, PROJAPPL, SCRATCH
  - Binding/Mapping
-      - You can bind/map directories from the Host machine into a Guest container
-      - singularity run -B /guest/path:/host/path  singularity_image.simg
+      - You can bind/map directories from the host machine into a guest container
+      - *singularity run -B /guest/path:/host/path  singularity_image.simg*
+
+#
+<br><br><br>
+     <p align="center">**Time for Tutorials:<br>BLAST <br> DeepVariant**</p>
